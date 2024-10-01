@@ -1,0 +1,29 @@
+name: Update submoule
+
+on:
+  push:
+    branches:
+      - main # Kích hoạt khi có push vào nhánh chính
+    paths:
+      - https://github.com/ChisLearn/sub_repo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true # Checkout submodul
+
+      - name: Update submodule
+        run: |
+          git submodule update --remote
+          git add .
+          git commit -m "Update submodule" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
