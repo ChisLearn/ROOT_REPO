@@ -5,7 +5,7 @@ on:
     branches:
       - main # Kích hoạt khi có push vào nhánh chính
     paths:
-      - https://github.com/ChisLearn/sub_repo
+      - ./sub_repo
 
 jobs:
   build:
